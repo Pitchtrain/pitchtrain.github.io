@@ -2,15 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url=https://pitchtrain.github.io/app">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pitchtrain</title>
-    <link rel="canonical" href="https://pitchtrain.github.io/app">
+    <title>Pitchtrain – Voice Pitch Trainer for Trans Voice Training</title>
+    <meta name="description" content="Free, open-source voice pitch trainer in your browser with real-time pitch detection, target ranges and recordings. Built for trans voice training.">
+    <link rel="canonical" href="https://pitchtrain.github.io/app/">
+    <link rel="alternate" hreflang="en" href="https://pitchtrain.github.io/app/">
+    <link rel="alternate" hreflang="de" href="https://pitchtrain.github.io/app/de/">
+    <link rel="alternate" hreflang="x-default" href="https://pitchtrain.github.io/app/">
     <script>
-      window.location.replace("https://pitchtrain.github.io/app");
+      // Same origin as the app, so the language chosen there is readable here.
+      (function () {
+        var language = null;
+        try {
+          language = localStorage.getItem("pitchtrain:language");
+        } catch (e) {}
+        if (!language) {
+          var languages = navigator.languages || [navigator.language || ""];
+          for (var i = 0; i < languages.length; i++) {
+            var base = String(languages[i]).toLowerCase().split("-")[0];
+            if (base === "de" || base === "en") {
+              language = base;
+              break;
+            }
+          }
+        }
+        var target = language && language.toLowerCase().indexOf("de") === 0 ? "/app/de/" : "/app/";
+        window.location.replace(target + window.location.search + window.location.hash);
+      })();
     </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=https://pitchtrain.github.io/app/">
+    </noscript>
   </head>
   <body>
-    <p>Redirecting to <a href="https://pitchtrain.github.io/app">pitchtrain.github.io/app</a>...</p>
+    <p>
+      Redirecting to <a href="https://pitchtrain.github.io/app/">Pitchtrain</a>
+      · <a href="https://pitchtrain.github.io/app/de/" hreflang="de" lang="de">Pitchtrain auf Deutsch</a>
+    </p>
   </body>
 </html>
